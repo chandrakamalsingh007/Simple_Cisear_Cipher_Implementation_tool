@@ -16,64 +16,87 @@ def input_text_analysis(input_text):
     return analysis_summary
 
 
-def encryption(input_text,shift_value, operation_mode ='encrypt'):
-    encrypted_text=""
-    #check for all characters
+def encryption(input_text, shift_value, operation_mode='encrypt'):
+    encrypted_text = ""
     for char in input_text:
-        #check if the character in encrypted text is a letter
         if char.isalpha(): 
-            #check if the character is from upper case or lowercase
             shift_direction = shift_value if operation_mode == 'encrypt' else -shift_value
             shift_base = ord('A') if char.isupper() else ord('a')
-            #perform the shift according to shift value and wrap around using modulo 
-            encrypted_char= chr((ord(char)- shift_base + shift_direction) % 26 + shift_base)
+            encrypted_char = chr((ord(char) - shift_base + shift_direction) % 26 + shift_base)
             encrypted_text += encrypted_char
         else:
-            encrypted_text += char # Non-alphabetic characters
+            encrypted_text += char
     return encrypted_text
 
-# def decryption(input_text,shift_value,operation_mode ='decrypt'):
-#     # Decrypting is just encrypting with the negative shift
-#     return encryption(input_text,-shift_value) 
 
 def handle_operation():
     operation_mode = cipher_mode.get()
     user_text = input_text_field.get()
-    try: 
+
+    # Check if shift value is valid
+    try:
         shift_value = int(shift_value_field.get())
-    except valueError:
-        messagebox.showerror("Error", "Invalid shift value.Please enter a valid number.")
+    except ValueError:
+        messagebox.showerror("Error", "Invalid shift value. Please enter a valid number.")
         return
 
+    # Analyze the input message
     analysis_summary = input_text_analysis(user_text)
-    encrypted_text = encryption(user_text,shift_value,operation_mode)
 
-    result_label.config(text=f"Result: {encrypted_text}")
-    analysis_label.config(text=analysis_summary)
+    # Encrypt or decrypt based on operation mode
+    encrypted_text = encryption(user_text, shift_value, operation_mode)
 
-#GUI setup 
+    # Show the encrypted/decrypted result
+    result_text.delete(1.0, gui.END)
+    result_text.insert(gui.END, f"Result: {encrypted_text}")
+
+    # Show analysis result
+    analysis_label.delete(1.0, gui.END)  # Clear any previous analysis
+    analysis_label.insert(gui.END, analysis_summary)  # Insert new analysis
+
+
+def clear_all():
+    input_text_field.delete(0, gui.END)
+    shift_value_field.delete(0, gui.END)
+    result_text.delete(1.0, gui.END)
+    analysis_label.delete(1.0, gui.END)
+
+
+# GUI setup
 display = gui.Tk()
-display.title("Implementation of Cisear Cipher Program")
-display.geometry("500x350")
+display.title("Implementation of Caesar Cipher Program")
+display.geometry("500x500")
 
+# Input text field
 gui.Label(display, text="Enter Message:").pack()
-input_text_field = gui.Entry(display,width=60)
+input_text_field = gui.Entry(display, width=100)
 input_text_field.pack()
 
+# Shift value input
 gui.Label(display, text="Enter Shift Value:\n For Encryption use +ve \n Decryption use -ve\n").pack()
 shift_value_field = gui.Entry(display, width=15)
 shift_value_field.pack()
 
+# Cipher mode selection
 cipher_mode = gui.StringVar(value='encrypt')
-gui.Radiobutton(display, text="Encrypt", variable=cipher_mode, value='encrypt')
-gui.Radiobutton(display, text="Decrypt", variable=cipher_mode, value='decrypt')
+gui.Radiobutton(display, text="Encrypt", variable=cipher_mode, value='encrypt').pack()
+gui.Radiobutton(display, text="Decrypt", variable=cipher_mode, value='decrypt').pack()
 
+# Buttons
 gui.Button(display, text="Process", command=handle_operation).pack()
+gui.Button(display, text="Clear All", command=clear_all).pack()
 
+# Result label
 result_label = gui.Label(display, text="Result: ")
 result_label.pack()
 
-analysis_label=gui.Label(display,text="")
+# Analysis text widget
+analysis_label = gui.Text(display, height=6, width=50)
 analysis_label.pack()
 
+# Text widget for result
+result_text = gui.Text(display, height=6, width=50)
+result_text.pack()
+
+# Start the GUI loop
 display.mainloop()
