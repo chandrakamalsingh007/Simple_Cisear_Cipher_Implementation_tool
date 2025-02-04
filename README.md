@@ -23,10 +23,10 @@ Make sure you have the following installed:
    git clone https://github.com/chandrakamalsingh007/PRODIGY_CS_01.git
 2. Navigate to the project directory:
    
-   cd caesar-cipher-project
+   cd PRODIGY_CS_01
 3. Run the project:
    
-   python caesar_cipher_gui.py
+   python3 ./Implemention_Caesar_Cipher.py 
 4. start as 
 
    ![caesar_cipher_gui](https://github.com/chandrakamalsingh007/PRODIGY_CS_01/blob/d1c9e2551d44c2696f6c66341b34e79d9bff7381/encryption.jpg)
