@@ -1,3 +1,6 @@
+import tkinter as gui
+from tkinter import messagebox
+
 def encryption(input_text,shift_value):
     encrypted_text=""
     #check for all characters
