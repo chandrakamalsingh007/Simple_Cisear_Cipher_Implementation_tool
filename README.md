@@ -2,7 +2,7 @@
 # TASK-01
 # Caesar Cipher Implementation with Python and Tkinter
 
-This project is a simple implementation of the **Caesar Cipher** encryption algorithm using Python's **Tkinter** library for the graphical user interface (GUI). It allows users to input a message, select whether they want to encrypt or decrypt it, and specify a shift value for the cipher. Additionally, it includes a message analysis feature that provides insights into the input message, such as the number of letters, digits, and special characters.
+This project is a simple implementation of the **Caesar Cipher** encryption and decryption algorithm using Python's **Tkinter** library for the graphical user interface (GUI). It allows users to input a message, select whether they want to encrypt or decrypt it, and specify a shift value for the cipher. Additionally, it includes a message analysis feature that provides insights into the input message, such as the number of letters, digits, and special characters.
 
 ## Features
 - **Encrypt and Decrypt**: Encrypt and decrypt messages using the Caesar Cipher technique.
