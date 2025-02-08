@@ -22,10 +22,10 @@ Make sure you have the following installed:
    ```bash
    git clone https://github.com/chandrakamalsingh007/PRODIGY_CS_01.git
 2. Navigate to the project directory:
-   
+   ```bash
    cd PRODIGY_CS_01
 3. Run the project:
-   
+   ```bash
    python3 ./Implemention_Caesar_Cipher.py 
 4. start as 
 
